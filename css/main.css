@@ -17,12 +17,30 @@ table {
   margin: 50px auto;
 }
 td {
-  border: 1px solid black;
-  width: 50px;
-  height: 50px;
+  border: 2px solid black;
+  width: 26px;
+  height: 26px;
   text-align: center;
 }
 .pole {
   position: relative;
   padding: 10px;
+  background-color: dimgray;
+}
+button {
+  height: 24px;
+  background-color: burlywood;
+  border-radius: 3px;
+  border: 1px solid black;
+  padding: 2px 10px;
+  font-size: 1em;
+}
+input {
+  width: 40px;
+  height: 24px;
+  background-color: blanchedalmond;
+  border: 1px solid black;
+}
+.heder {
+  padding: 15px 50px;
 }
