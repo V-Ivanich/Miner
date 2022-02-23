@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+html {
+  max-width: 1200px;
+  background-color: darkcyan;
+  margin: 0 auto;
+}
+body {
+  background-color: #f1f1f1;
+}
+table {
+  border-collapse: collapse;
+  margin: 50px auto;
+}
+td {
+  border: 1px solid black;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+}
+.pole {
+  position: relative;
+  padding: 10px;
+}
