@@ -3,51 +3,60 @@ const tabl = document.querySelector('.pole');
 const inPut = document.querySelector('#vvod');
 const bTn = document.querySelector('.btn');
 let massiv = [],
-  n,
-  t;
+  n = 0,
+  t = 0;
 
-  function randOm(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min;
-  }
+function randOm(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+}
 
-bTn.addEventListener('click', () => {
+//создание таблицы для поля
+bTn.addEventListener('click', function () {
+  //создание непосредственно таблицы
   let tablica = document.createElement('table');
   let position = +inPut.value;
-  for (let k = 0; k < position + 2; k++) {
+
+  for (let k = 0; k < position; k++) {
     let row = document.createElement('tr');
-    massiv.push([0]);
-    for (let i = 0; i < position + 2; i++) {
+    for (let i = 0; i < position; i++) {
       let td = document.createElement("td");
       row.appendChild(td);
-      massiv[k][i] = 0;
     }
     tablica.appendChild(row);
   }
   tabl.appendChild(tablica);
+
+  //создание массива
+  for (let o = 0; o < position + 2; o++) {
+    massiv.push([0]);
+    for (let p = 0; p < position + 2; p++) {
+      massiv[o][p] = 0;
+    }
+  }
   console.log(massiv);
 
   //расставляем мины в случайном порядке
-  for( let a = 0; a < inPut.value / 2 + 2; a++){
-    n = randOm(1, massiv.length - 1);
-    t = randOm(1, massiv.length - 1);
+  for (let a = 0; a < position / 2 + 2; a++) {
+    n = randOm(1, massiv.length - 2);
+    t = randOm(1, massiv.length - 2);
     massiv[n][t] = "M";
     tablica.rows[n].cells[t].innerHTML = "M";
     tablica.rows[n].cells[t].style.color = "red";
   }
 
-  for(let i = 1; i < massiv.length - 1; i++){
-    for(let j = 1; j < massiv.length - 1; j++) {
-      let mina =  massiv[i][j];
-      if(mina == "M") {
+  for (let i = 1; i < massiv.length - 1; i++) {
+    for (let j = 1; j < massiv.length - 1; j++) {
+      let mina = massiv[i][j];
+      if (mina == "M") {
         console.log(i + ' ' + j);
       }
     }
   }
 });
 
-function processingBomb (x, y){
+function processingBomb(x, y) {
 
 }
 
