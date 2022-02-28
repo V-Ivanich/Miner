@@ -3,6 +3,8 @@ const tabl = document.querySelector('.pole');
 const inPut = document.querySelector('#vvod');
 const bTn = document.querySelector('.btn');
 let massiv = [],
+  bomb = 0,
+  sumBobms = 2,
   n = 0,
   t = 0;
 
@@ -38,25 +40,67 @@ bTn.addEventListener('click', function () {
   console.log(massiv);
 
   //расставляем мины в случайном порядке
-  for (let a = 0; a < position / 2 + 2; a++) {
+  for (let a = 0; a < position + sumBobms; a++) {
     n = randOm(1, massiv.length - 2);
     t = randOm(1, massiv.length - 2);
     massiv[n][t] = "M";
-    tablica.rows[n].cells[t].innerHTML = "M";
-    tablica.rows[n].cells[t].style.color = "red";
+    
   }
 
-  for (let i = 1; i < massiv.length - 1; i++) {
-    for (let j = 1; j < massiv.length - 1; j++) {
+  for (let i = 1; i < massiv.length - 2; i++) {
+    for (let j = 1; j < massiv.length - 2; j++) {
       let mina = massiv[i][j];
       if (mina == "M") {
-        console.log(i + ' ' + j);
+        processingBomb(i, j);
       }
     }
   }
+
+  //запись из массива в таблицу
+  for (let i = 1; i < massiv.length - 2; i++) {
+    for (let j = 1; j < massiv.length - 2; j++) {
+      let mina = massiv[i][j];
+      if (mina != 0) {
+        tablica.rows[i].cells[j].innerHTML = mina;
+        tablica.rows[i].cells[j].style.color = '#fff';
+        if(mina == 'M'){
+          tablica.rows[i].cells[j].style.color = 'red';
+        }
+      } else continue;
+    }
+  }
+
 });
 
 function processingBomb(x, y) {
-
+  if(massiv[x][y-1] != "M"){
+    calculation(x, y-1);
+  }
+  if(massiv[x-1][y-1] != "M"){
+    calculation(x -1, y-1);
+  }
+  if(massiv[x + 1][y-1] != "M"){
+    calculation(x + 1, y-1);
+  }
+  if(massiv[x - 1][y] != "M"){
+    calculation(x -1, y);
+  }
+  if(massiv[x + 1][y] != "M"){
+    calculation(x + 1, y);
+  }
+  if(massiv[x][y+1] != "M"){
+    calculation(x, y+1);
+  }
+  if(massiv[x - 1][y+1] != "M"){
+    calculation(x - 1, y+1);
+  }
+  if(massiv[x + 1][y+1] != "M"){
+    calculation(x + 1, y+1);
+  }
 }
 
+function calculation(r, c){
+  bomb = massiv[r][c];
+  bomb ++;
+  massiv[r][c] = bomb;
+}
