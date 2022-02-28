@@ -1,10 +1,12 @@
 
 const tabl = document.querySelector('.pole');
-const inPut = document.querySelector('#vvod');
+const inPut = document.querySelector('#vvod'); 
+let enter_bomb = document.querySelector('#enterBomb'); 
+let sumMine = document.querySelector('.sum');
 const bTn = document.querySelector('.btn');
 let massiv = [],
+  sumBobms = 0,
   bomb = 0,
-  sumBobms = 2,
   n = 0,
   t = 0;
 
@@ -19,6 +21,7 @@ bTn.addEventListener('click', function () {
   //создание непосредственно таблицы
   let tablica = document.createElement('table');
   let position = +inPut.value;
+  sumBobms = +enter_bomb.value;
 
   for (let k = 0; k < position; k++) {
     let row = document.createElement('tr');
@@ -40,13 +43,20 @@ bTn.addEventListener('click', function () {
   console.log(massiv);
 
   //расставляем мины в случайном порядке
+  let s_mine = 0;
   for (let a = 0; a < position + sumBobms; a++) {
     n = randOm(1, massiv.length - 2);
     t = randOm(1, massiv.length - 2);
-    massiv[n][t] = "M";
-    
+    while(massiv[n][t] == "M"){
+      n = randOm(1, massiv.length - 2);
+      t = randOm(1, massiv.length - 2);
+    }
+   massiv[n][t] = "M";
+   s_mine++;
   }
+  sumMine.innerHTML += s_mine;
 
+  //обработка бомб\мин
   for (let i = 1; i < massiv.length - 2; i++) {
     for (let j = 1; j < massiv.length - 2; j++) {
       let mina = massiv[i][j];
@@ -57,14 +67,14 @@ bTn.addEventListener('click', function () {
   }
 
   //запись из массива в таблицу
-  for (let i = 1; i < massiv.length - 2; i++) {
-    for (let j = 1; j < massiv.length - 2; j++) {
+  for (let i = 1; i < massiv.length - 1; i++) {
+    for (let j = 1; j < massiv.length - 1; j++) {
       let mina = massiv[i][j];
       if (mina != 0) {
-        tablica.rows[i].cells[j].innerHTML = mina;
-        tablica.rows[i].cells[j].style.color = '#fff';
+        tablica.rows[i -1].cells[j -1].innerHTML = mina;
+        tablica.rows[i -1].cells[j -1].style.color = '#fff';
         if(mina == 'M'){
-          tablica.rows[i].cells[j].style.color = 'red';
+          tablica.rows[i -1].cells[j-1].style.color = 'red';
         }
       } else continue;
     }

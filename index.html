@@ -6,20 +6,35 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Miner</title>
-  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./less/main.css">
 </head>
 
 <body>
   <header>
     <div class="heder">
       <h1>Сапер!</h1>
+      <div class="block_labels">
       <select id="vvod">
         <option class="checkBox" value= 10 >10 X 10</option>
         <option class="checkBox" value= 16 >16 X 16</option>
         <option class="checkBox" value= 20 >20 X 20</option>
       </select>
-      <label for="#vvod">Размерность поля</label>
+      <label for="#vvod">Размер поля</label>
+    </div>
+
+    <div class="block_labels">
+      <select id="enterBomb">
+        <option class="checkBox" value= 5 >+ 5</option>
+        <option class="checkBox" value= 10 >+ 10</option>
+        <option class="checkBox" value= 15 >+ 15</option>
+      </select>
+      <label for="#enterBomb">Дополнительные мины</label>
+    </div>
+    <div class="block_labels">
+    <label for="" class="sum" >Всего мин :</label>
+  </div>
       <button class="btn">Применить</button>
+
     </div>
 
   </header>
