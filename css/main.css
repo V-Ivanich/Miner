@@ -6,23 +6,24 @@
 }
 html {
   max-width: 1200px;
-  background-color: darkcyan;
+  background-color: rgba(136, 169, 196, 0.815);
   margin: 0 auto;
 }
 body {
   background-color: #f1f1f1;
+  font-size: 18px;
+  font-family: "Roboto";
 }
 h1 {
-  margin: 5px auto;
-  text-align: center;
-  color: cornflowerblue;
+  padding-left: 10%;
+  color: #71b9cf;
 }
 table {
   border-collapse: collapse;
   margin: 50px auto;
 }
 td {
-  border: 2px solid black;
+  border: 2px solid #f2f4f5;
   width: 26px;
   height: 26px;
   text-align: center;
@@ -31,11 +32,11 @@ td {
 .pole {
   position: relative;
   padding: 10px;
-  background-color: rosybrown;
+  background-color: #8fbcae;
 }
 button {
-  height: 24px;
-  background-color: burlywood;
+  height: 26px;
+  background-color: #94c5db;
   border-radius: 3px;
   border: 1px solid black;
   padding: 2px 10px;
@@ -44,12 +45,13 @@ button {
 select {
   width: 70px;
   height: 24px;
-  background-color: orange;
+  background-color: rgba(167, 215, 224, 0.89);
   border: 1px solid black;
+  margin-right: 10px;
 }
 .heder {
   padding: 15px 50px;
-  background-color: bisque;
+  background-color: rgba(176, 235, 232, 0.842);
 }
 .block_labels {
   margin: 10px 15px;
@@ -58,5 +60,5 @@ button {
   margin: 10px 15px;
 }
 table {
-  background-color: greenyellow;
+  background-color: #a3cac8;
 }

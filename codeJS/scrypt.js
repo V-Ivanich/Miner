@@ -19,13 +19,14 @@ function randOm(min, max) {
 
 //создание таблицы для поля
 bTn.addEventListener('click', function () {
- 
- if(document.querySelector('table')){
-   tabl.removeChild(tablica);
-   massiv = [];
- }
+
+  if (document.querySelector('table')) {
+    tabl.removeChild(tablica);
+    massiv = [];
+    sumMine.innerHTML = 'Всего мин :';
+  }
   //создание непосредственно таблицы
-  tablica= document.createElement('table');
+  tablica = document.createElement('table');
   let position = +inPut.value;
   sumBobms = +enter_bomb.value;
 
@@ -47,21 +48,20 @@ bTn.addEventListener('click', function () {
       massiv[o][p] = 0;
     }
   }
-  console.log(massiv);
 
   //расставляем мины в случайном порядке
   let s_mine = 0;
   for (let a = 0; a < position + sumBobms; a++) {
     n = randOm(1, massiv.length - 2);
     t = randOm(1, massiv.length - 2);
-    while(massiv[n][t] == "M"){
+    while (massiv[n][t] == "M") {
       n = randOm(1, massiv.length - 2);
       t = randOm(1, massiv.length - 2);
     }
-   massiv[n][t] = "M";
-   s_mine++;
+    massiv[n][t] = "M";
+    s_mine++;
   }
-  sumMine.innerHTML += s_mine;
+  sumMine.innerHTML += ' ' + s_mine;
 
   //обработка бомб\мин
   for (let i = 1; i < massiv.length - 2; i++) {
@@ -74,7 +74,7 @@ bTn.addEventListener('click', function () {
   }
 
 
-//получение координат при клике
+  //получение координат при клике
   document.querySelector('table').onclick = (event) => {
     let cell = event.target;
     if (cell.tagName.toLowerCase() != 'td')
@@ -83,15 +83,15 @@ bTn.addEventListener('click', function () {
     let j = cell.cellIndex;
 
     let mina = massiv[i + 1][j + 1];
-    if(mina == 0) {
+    if (mina == 0) {
       tablica.rows[i].cells[j].innerHTML = '';
-      tablica.rows[i].cells[j].style.background = '#1c1c1c'; 
-     }  else {
-        tablica.rows[i].cells[j].innerHTML = mina;
-        tablica.rows[i].cells[j].style.color = '#fff'; 
-        tablica.rows[i].cells[j].style.background = '#1c1c1c'; 
-          if(mina == 'M')
-             tablica.rows[i].cells[j].style.color = 'red';      
+      tablica.rows[i].cells[j].style.background = 'rgba(136, 169, 196, 0.815)';
+    } else {
+      tablica.rows[i].cells[j].innerHTML = mina;
+      tablica.rows[i].cells[j].style.color = '#fff';
+      tablica.rows[i].cells[j].style.background = 'rgba(136, 169, 196, 0.815)';
+      if (mina == 'M')
+        tablica.rows[i].cells[j].style.color = 'red';
 
     }
   }
@@ -99,34 +99,36 @@ bTn.addEventListener('click', function () {
 });
 
 function processingBomb(x, y) {
-  if(massiv[x][y-1] != "M"){
-    calculation(x, y-1);
+  if (massiv[x][y - 1] != "M") {
+    calculation(x, y - 1);
   }
-  if(massiv[x-1][y-1] != "M"){
-    calculation(x -1, y-1);
+  if (massiv[x - 1][y - 1] != "M") {
+    calculation(x - 1, y - 1);
   }
-  if(massiv[x + 1][y-1] != "M"){
-    calculation(x + 1, y-1);
+  if (massiv[x + 1][y - 1] != "M") {
+    calculation(x + 1, y - 1);
   }
-  if(massiv[x - 1][y] != "M"){
-    calculation(x -1, y);
+  if (massiv[x - 1][y] != "M") {
+    calculation(x - 1, y);
   }
-  if(massiv[x + 1][y] != "M"){
+  if (massiv[x + 1][y] != "M") {
     calculation(x + 1, y);
   }
-  if(massiv[x][y+1] != "M"){
-    calculation(x, y+1);
+  if (massiv[x][y + 1] != "M") {
+    calculation(x, y + 1);
   }
-  if(massiv[x - 1][y+1] != "M"){
-    calculation(x - 1, y+1);
+  if (massiv[x - 1][y + 1] != "M") {
+    calculation(x - 1, y + 1);
   }
-  if(massiv[x + 1][y+1] != "M"){
-    calculation(x + 1, y+1);
+  if (massiv[x + 1][y + 1] != "M") {
+    calculation(x + 1, y + 1);
   }
 }
 
-function calculation(r, c){
+function calculation(r, c) {
   bomb = massiv[r][c];
-  bomb ++;
+  bomb++;
   massiv[r][c] = bomb;
 }
+//после взрыва, поле должно уехать влево, а справа
+//приехать могилка с текстом КОНЕЦ
