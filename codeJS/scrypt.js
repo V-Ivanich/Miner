@@ -1,9 +1,9 @@
 
-const tabl = document.querySelector('.pole');
-const inPut = document.querySelector('#vvod'); 
-let enter_bomb = document.querySelector('#enterBomb'); 
-let sumMine = document.querySelector('.sum');
-const bTn = document.querySelector('.btn');
+const tabl = document.querySelector('.pole');//место для таблицы
+const inPut = document.querySelector('#vvod'); //выбор размера поля
+let enter_bomb = document.querySelector('#enterBomb'); //дополнительные мины +5, +10, + 15
+let sumMine = document.querySelector('.sum'); //общее кол-во мин на поле
+const bTn = document.querySelector('.btn'); //кнопка
 let massiv = [],
   sumBobms = 0,
   bomb = 0,
@@ -32,6 +32,7 @@ bTn.addEventListener('click', function () {
     tablica.appendChild(row);
   }
   tabl.appendChild(tablica);
+
 
   //создание массива
   for (let o = 0; o < position + 2; o++) {
@@ -66,17 +67,26 @@ bTn.addEventListener('click', function () {
     }
   }
 
-  //запись из массива в таблицу
-  for (let i = 1; i < massiv.length - 1; i++) {
-    for (let j = 1; j < massiv.length - 1; j++) {
-      let mina = massiv[i][j];
-      if (mina != 0) {
-        tablica.rows[i -1].cells[j -1].innerHTML = mina;
-        tablica.rows[i -1].cells[j -1].style.color = '#fff';
-        if(mina == 'M'){
-          tablica.rows[i -1].cells[j-1].style.color = 'red';
-        }
-      } else continue;
+
+//получение координат при клике
+  document.querySelector('table').onclick = (event) => {
+    let cell = event.target;
+    if (cell.tagName.toLowerCase() != 'td')
+      return;
+    let i = cell.parentNode.rowIndex;
+    let j = cell.cellIndex;
+
+    let mina = massiv[i + 1][j + 1];
+    if(mina == 0) {
+      tablica.rows[i].cells[j].innerHTML = '';
+      tablica.rows[i].cells[j].style.background = '#1c1c1c'; 
+     }  else {
+        tablica.rows[i].cells[j].innerHTML = mina;
+        tablica.rows[i].cells[j].style.color = '#fff'; 
+        tablica.rows[i].cells[j].style.background = '#1c1c1c'; 
+          if(mina == 'M')
+             tablica.rows[i].cells[j].style.color = 'red';      
+
     }
   }
 
