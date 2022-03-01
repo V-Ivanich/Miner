@@ -5,6 +5,7 @@ let enter_bomb = document.querySelector('#enterBomb'); //дополнитель�
 let sumMine = document.querySelector('.sum'); //общее кол-во мин на поле
 const bTn = document.querySelector('.btn'); //кнопка
 let massiv = [],
+  tablica,
   sumBobms = 0,
   bomb = 0,
   n = 0,
@@ -18,8 +19,13 @@ function randOm(min, max) {
 
 //создание таблицы для поля
 bTn.addEventListener('click', function () {
+ 
+ if(document.querySelector('table')){
+   tabl.removeChild(tablica);
+   massiv = [];
+ }
   //создание непосредственно таблицы
-  let tablica = document.createElement('table');
+  tablica= document.createElement('table');
   let position = +inPut.value;
   sumBobms = +enter_bomb.value;
 
