@@ -99,7 +99,7 @@ bTn.addEventListener('click', function () {
     }
   }
 
-  //* обработка правой кнопки мыши (флаги)
+  //? обработка правой кнопки мыши (флаги)
   document.querySelector('table').oncontextmenu = (e) => {
     let cell = e.target;
     if (cell.tagName.toLowerCase() != 'td')
@@ -108,12 +108,12 @@ bTn.addEventListener('click', function () {
     let y = cell.cellIndex;
     let sod_e = tablica.rows[x].cells[y].innerHTML;
 
-    console.log(sod_e);
-    if (sod_e != 'F') {
+    if (sod_e != 'F' && s_mine > 0) { //* если не флаг и есть мины
       tablica.rows[x].cells[y].innerHTML = 'F';
       tablica.rows[x].cells[y].style.color = '#000';
       s_mine--;
-    } else {
+    }
+    else {
       tablica.rows[x].cells[y].innerHTML = '';
       s_mine++;
     }
