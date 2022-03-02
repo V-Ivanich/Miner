@@ -17,7 +17,7 @@ function randOm(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-//создание таблицы для поля
+//!  создание таблицы для поля
 bTn.addEventListener('click', function () {
 
   if (document.querySelector('table')) {
@@ -25,7 +25,7 @@ bTn.addEventListener('click', function () {
     massiv = [];
     sumMine.innerHTML = 'Всего мин :';
   }
-  //создание непосредственно таблицы
+  //? создание непосредственно таблицы
   tablica = document.createElement('table');
   let position = +inPut.value;
   sumBobms = +enter_bomb.value;
@@ -41,7 +41,7 @@ bTn.addEventListener('click', function () {
   tabl.appendChild(tablica);
 
 
-  //создание массива
+  //? создание массива
   for (let o = 0; o < position + 2; o++) {
     massiv.push([0]);
     for (let p = 0; p < position + 2; p++) {
@@ -49,7 +49,7 @@ bTn.addEventListener('click', function () {
     }
   }
 
-  //расставляем мины в случайном порядке
+  //? расставляем мины в случайном порядке
   let s_mine = 0;
   for (let a = 0; a < position + sumBobms; a++) {
     n = randOm(1, massiv.length - 2);
@@ -63,7 +63,7 @@ bTn.addEventListener('click', function () {
   }
   sumMine.innerHTML += ' ' + s_mine;
 
-  //обработка бомб\мин
+  //* обработка бомб\мин
   for (let i = 1; i < massiv.length - 2; i++) {
     for (let j = 1; j < massiv.length - 2; j++) {
       let mina = massiv[i][j];
@@ -74,7 +74,7 @@ bTn.addEventListener('click', function () {
   }
 
 
-  //получение координат при клике
+  //? получение координат при клике
   document.querySelector('table').onclick = (event) => {
     let cell = event.target;
     if (cell.tagName.toLowerCase() != 'td')
@@ -83,6 +83,8 @@ bTn.addEventListener('click', function () {
     let j = cell.cellIndex;
 
     let mina = massiv[i + 1][j + 1];
+    let flag = tablica.rows[i].cells[j].innerHTML;
+    if (flag == 'F') { return }
     if (mina == 0) {
       tablica.rows[i].cells[j].innerHTML = '';
       tablica.rows[i].cells[j].style.background = 'rgba(136, 169, 196, 0.815)';
@@ -90,10 +92,34 @@ bTn.addEventListener('click', function () {
       tablica.rows[i].cells[j].innerHTML = mina;
       tablica.rows[i].cells[j].style.color = '#fff';
       tablica.rows[i].cells[j].style.background = 'rgba(136, 169, 196, 0.815)';
-      if (mina == 'M')
+      if (mina == 'M') {
         tablica.rows[i].cells[j].style.color = 'red';
-
+        alert('Пиздец!' + 'Пиздец!' + 'Пиздец!');
+      }
     }
+  }
+
+  //* обработка правой кнопки мыши (флаги)
+  document.querySelector('table').oncontextmenu = (e) => {
+    let cell = e.target;
+    if (cell.tagName.toLowerCase() != 'td')
+      return;
+    let x = cell.parentNode.rowIndex;
+    let y = cell.cellIndex;
+    let sod_e = tablica.rows[x].cells[y].innerHTML;
+
+    console.log(sod_e);
+    if (sod_e != 'F') {
+      tablica.rows[x].cells[y].innerHTML = 'F';
+      tablica.rows[x].cells[y].style.color = '#000';
+      s_mine--;
+    } else {
+      tablica.rows[x].cells[y].innerHTML = '';
+      s_mine++;
+    }
+    sumMine.innerHTML = 'Всего мин :' + ' ' + s_mine;
+
+    return false;
   }
 
 });
@@ -130,5 +156,5 @@ function calculation(r, c) {
   bomb++;
   massiv[r][c] = bomb;
 }
-//после взрыва, поле должно уехать влево, а справа
-//приехать могилка с текстом КОНЕЦ
+//TODO : после взрыва, поле должно уехать влево, а справа
+//TODO : приехать могилка с текстом КОНЕЦ
