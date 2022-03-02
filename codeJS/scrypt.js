@@ -114,8 +114,13 @@ bTn.addEventListener('click', function () {
       s_mine--;
     }
     else {
-      tablica.rows[x].cells[y].innerHTML = '';
-      s_mine++;
+      if (sod_e != 'F' && s_mine == 0) {
+        return false;
+      }
+      else {
+        tablica.rows[x].cells[y].innerHTML = '';
+        s_mine++;
+      }
     }
     sumMine.innerHTML = 'Всего мин :' + ' ' + s_mine;
 
