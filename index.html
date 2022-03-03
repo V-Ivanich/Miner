@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
   <meta charset="UTF-8">
@@ -11,35 +11,58 @@
 
 <body>
   <header>
-    <div class="heder">
-      <h1>Сапер!</h1>
-      <div class="block_labels">
-        <select id="vvod">
-          <option class="checkBox" value=10>10 X 10</option>
-          <option class="checkBox" value=16>16 X 16</option>
-          <option class="checkBox" value=20>20 X 20</option>
-        </select>
-        <label for="#vvod">Размер поля</label>
+    <!--? панель меню -->
+    <div class="menu_body">
+      <div class="logo">
+        <h1>Сапер!</h1>
       </div>
+      <nav class="menu__menu">
+        <ul class="list">
+          <div class="conteiner_1">
+            <li class="link_item">Размер поля</li>
+            <div class="sub_menu">
+              <select id="vvod">
+                <option class="checkBox" value=10>10 X 10</option>
+                <option class="checkBox" value=16>16 X 16</option>
+                <option class="checkBox" value=20>20 X 20</option>
+              </select>
+            </div>
+          </div>
+          <div class="conteiner_2">
+            <li class="link_item">Доп. мины</li>
+            <div class="sub_menu">
+              <select id="enterBomb">
+                <option class="checkBox" value=5>+ 5</option>
+                <option class="checkBox" value=10>+ 10</option>
+                <option class="checkBox" value=15>+ 15</option>
+              </select>
+            </div>
+          </div>
+        </ul>
+      </nav>
+    </div>
 
-      <div class="block_labels">
-        <select id="enterBomb">
-          <option class="checkBox" value=5>+ 5</option>
-          <option class="checkBox" value=10>+ 10</option>
-          <option class="checkBox" value=15>+ 15</option>
-        </select>
-        <label for="#enterBomb">Дополнительные мины</label>
-      </div>
-      <div class="block_labels">
+
+
+    <div class="heder">
+
+      <div class="block">
         <label for="" class="sum">Всего мин :</label>
       </div>
-      <input id="check" type="checkbox">
-      <label for="check">Флаг</label>
-      <button class="btn">Играть</button>
+
+      <div class="block">
+        <input id="check" type="checkbox">
+        <label for="check">Флаг</label>
+      </div>
+
+      <div class="block">
+        <button class="btn">Играть</button>
+      </div>
 
     </div>
 
   </header>
+
   <main>
     <div class="pole">
     </div>

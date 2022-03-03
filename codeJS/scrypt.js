@@ -72,7 +72,7 @@ bTn.addEventListener('click', function () {
       }
     }
   }
-
+  console.log(massiv);
 
   //? получение координат при клике
   document.querySelector('table').onclick = (event) => {
