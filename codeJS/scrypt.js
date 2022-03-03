@@ -83,7 +83,7 @@ bTn.addEventListener('click', function () {
       return;
     let i = cell.parentNode.rowIndex;
     let j = cell.cellIndex;
-
+    console.log(i, j);
     let mina = massiv[i + 1][j + 1];
     let flag = tablica.rows[i].cells[j].innerHTML;
     if (flag == 'F') { return }
