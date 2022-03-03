@@ -6,6 +6,7 @@ let sumMine = document.querySelector('.sum'); //общее кол-во мин н
 const bTn = document.querySelector('.btn'); //кнопка
 const game = document.querySelector('#gm');// конец игры, - строка
 let massiv = [],
+  mina,
   tablica,
   sumBobms = 0,
   bomb = 0,
@@ -42,7 +43,6 @@ bTn.addEventListener('click', function () {
   }
   tabl.appendChild(tablica);
 
-
   //? создание массива
   for (let o = 0; o < position + 2; o++) {
     massiv.push([0]);
@@ -68,7 +68,7 @@ bTn.addEventListener('click', function () {
   //* обработка бомб\мин
   for (let i = 1; i < massiv.length - 2; i++) {
     for (let j = 1; j < massiv.length - 2; j++) {
-      let mina = massiv[i][j];
+      mina = massiv[i][j];
       if (mina == "M") {
         processingBomb(i, j);
       }
@@ -83,22 +83,19 @@ bTn.addEventListener('click', function () {
       return;
     let i = cell.parentNode.rowIndex;
     let j = cell.cellIndex;
-    console.log(i, j);
     let mina = massiv[i + 1][j + 1];
     let flag = tablica.rows[i].cells[j].innerHTML;
     if (flag == 'F') { return }
     if (mina == 0) {
       tablica.rows[i].cells[j].innerHTML = '';
-      tablica.rows[i].cells[j].style.background = 'rgba(136, 169, 196, 0.815)';
+      tablica.rows[i].cells[j].style.background = 'rgba(190, 180, 147, 0.66)';
     } else {
       tablica.rows[i].cells[j].innerHTML = mina;
       tablica.rows[i].cells[j].style.color = '#fff';
-      tablica.rows[i].cells[j].style.background = 'rgba(136, 169, 196, 0.815)';
+      tablica.rows[i].cells[j].style.background = 'rgba(190, 180, 147, 0.66)';
       if (mina == 'M') {
         tablica.rows[i].cells[j].style.color = 'red';
-        document.querySelector('.centr').onclick = () => {
-          game.classList.add('run');
-        }
+        game.classList.add('run');
       }
     }
   }
@@ -115,7 +112,23 @@ bTn.addEventListener('click', function () {
     if (sod_e != 'F' && s_mine > 0) { //* если не флаг и есть мины
       tablica.rows[x].cells[y].innerHTML = 'F';
       tablica.rows[x].cells[y].style.color = '#000';
-      s_mine--;
+      s_mine = s_mine - 1;
+
+      //* далее проверка на соответствие флаг\мина
+      let minaFlag;
+      if (s_mine == 0) {
+        for (let i = 0; i < inPut; i++) {
+          for (let j = 0; j < inPut; j++) {
+            minaFlag = tablica[i][j];
+            if (minaFlag == "F") {
+              let miniMina = massiv[i + 1][j + 1];
+              if (miniMina == 'M') {
+                console.log('winer!!!!!');
+              }
+            }
+          }
+        }
+      }
     }
     else {
       if (sod_e != 'F' && s_mine == 0) {
