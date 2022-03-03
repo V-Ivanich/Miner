@@ -4,6 +4,7 @@ const inPut = document.querySelector('#vvod'); //выбор размера по�
 let enter_bomb = document.querySelector('#enterBomb'); //дополнительные мины +5, +10, + 15
 let sumMine = document.querySelector('.sum'); //общее кол-во мин на поле
 const bTn = document.querySelector('.btn'); //кнопка
+const game = document.querySelector('#gm');// конец игры, - строка
 let massiv = [],
   tablica,
   sumBobms = 0,
@@ -23,6 +24,7 @@ bTn.addEventListener('click', function () {
   if (document.querySelector('table')) {
     tabl.removeChild(tablica);
     massiv = [];
+    game.classList.remove('run');
     sumMine.innerHTML = 'Всего мин :';
   }
   //? создание непосредственно таблицы
@@ -94,7 +96,9 @@ bTn.addEventListener('click', function () {
       tablica.rows[i].cells[j].style.background = 'rgba(136, 169, 196, 0.815)';
       if (mina == 'M') {
         tablica.rows[i].cells[j].style.color = 'red';
-        alert('Пиздец!' + 'Пиздец!' + 'Пиздец!');
+        document.querySelector('.centr').onclick = () => {
+          game.classList.add('run');
+        }
       }
     }
   }
