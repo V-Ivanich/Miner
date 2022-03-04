@@ -95,6 +95,7 @@ bTn.addEventListener('click', function () {
       tablica.rows[i].cells[j].style.background = 'rgba(190, 180, 147, 0.66)';
       if (mina == 'M') {
         tablica.rows[i].cells[j].style.color = 'red';
+        document.querySelector('.over').innerHTML = 'GAME OVER!';
         game.classList.add('run');
       }
     }
@@ -117,16 +118,22 @@ bTn.addEventListener('click', function () {
       //* далее проверка на соответствие флаг\мина
       let minaFlag;
       if (s_mine == 0) {
-        for (let i = 0; i < inPut; i++) {
-          for (let j = 0; j < inPut; j++) {
-            minaFlag = tablica[i][j];
+        console.log('Проверка?');
+        for (let i = 0; i < position; i++) {
+          for (let j = 0; j < position; j++) {
+            minaFlag = tablica.rows[i].cells[j].innerHTML;
             if (minaFlag == "F") {
               let miniMina = massiv[i + 1][j + 1];
               if (miniMina == 'M') {
-                console.log('winer!!!!!');
-              }
-            }
+                s_mine++;
+              } else continue;
+            } else continue;
           }
+        }
+        if (position + sumBobms == s_mine) {
+          console.log('winer!!!!!');
+          document.querySelector('.over').innerHTML = 'YOU WON!';
+          game.classList.add('run');
         }
       }
     }
