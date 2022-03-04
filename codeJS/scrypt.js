@@ -10,6 +10,7 @@ let massiv = [],
   tablica,
   sumBobms = 0,
   bomb = 0,
+  globalOut = 0,
   n = 0,
   t = 0;
 
@@ -27,6 +28,7 @@ bTn.addEventListener('click', function () {
     massiv = [];
     game.classList.remove('run');
     sumMine.innerHTML = 'Всего мин :';
+    globalOut = 0;
   }
   //? создание непосредственно таблицы
   tablica = document.createElement('table');
@@ -78,6 +80,7 @@ bTn.addEventListener('click', function () {
 
   //? получение координат при клике
   document.querySelector('table').onclick = (event) => {
+    if (globalOut == 1) return;
     let cell = event.target;
     if (cell.tagName.toLowerCase() != 'td')
       return;
@@ -97,6 +100,7 @@ bTn.addEventListener('click', function () {
         tablica.rows[i].cells[j].style.color = 'red';
         document.querySelector('.over').innerHTML = 'GAME OVER!';
         game.classList.add('run');
+        globalOut = 1;
       }
     }
   }
@@ -134,6 +138,7 @@ bTn.addEventListener('click', function () {
           console.log('winer!!!!!');
           document.querySelector('.over').innerHTML = 'YOU WON!';
           game.classList.add('run');
+          globalOut = 1;
         }
       }
     }
