@@ -5,6 +5,8 @@ let enter_bomb = document.querySelector('#enterBomb'); //дополнитель�
 let sumMine = document.querySelector('.sum'); //общее кол-во мин на поле
 const bTn = document.querySelector('.btn'); //кнопка
 const game = document.querySelector('#gm');// конец игры, - строка
+const minutes = document.getElementById('minutes');//минуты
+const seconds = document.getElementById('seconds');//секунды
 let massiv = [],
   mina,
   tablica,
@@ -14,13 +16,40 @@ let massiv = [],
   n = 0,
   t = 0;
 
+let mins = 0;
+let secs = 0;
+let interval;
+
+function timer() {
+  interval = setInterval(timerSet, 1000);
+}
+
+function timerSet() {
+  secs++;
+  if (secs < 10) {
+    seconds.innerHTML = '0' + secs;
+  }
+  else {
+    seconds.innerHTML = secs;
+  }
+  if (secs == 60) {
+    secs = 0;
+    mins++;
+    if (mins < 10) {
+      minutes.innerHTML = '0' + mins;
+    }
+    else {
+      minutes.innerHTML = mins;
+    }
+  }
+}
 function randOm(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-//!  создание таблицы для поля
+//!  создание таблицы для поля и начало игры
 bTn.addEventListener('click', function () {
 
   if (document.querySelector('table')) {
@@ -29,6 +58,10 @@ bTn.addEventListener('click', function () {
     game.classList.remove('run');
     sumMine.innerHTML = 'Всего мин :';
     globalOut = 0;
+    mins = 0;
+    secs = 0;
+    minutes.innerHTML = '00';
+    seconds.innerHTML = '00';
   }
   //? создание непосредственно таблицы
   tablica = document.createElement('table');
@@ -77,6 +110,7 @@ bTn.addEventListener('click', function () {
     }
   }
   console.log(massiv);
+  timer();
 
   //? получение координат при клике
   document.querySelector('table').onclick = (event) => {
@@ -101,6 +135,7 @@ bTn.addEventListener('click', function () {
         document.querySelector('.over').innerHTML = 'GAME OVER!';
         game.classList.add('run');
         globalOut = 1;
+        clearInterval(interval);
       }
     }
   }

@@ -51,3 +51,11 @@ button {
 .sum_bomb {
   width: 150px;
 }
+.timer {
+  margin-left: 50px;
+  padding: 8px 0px;
+}
+.time {
+  font-size: 32px;
+  color: rgba(204, 233, 241, 0.89);
+}
