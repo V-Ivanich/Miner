@@ -17,7 +17,8 @@ h1 {
   color: rgba(204, 233, 241, 0.89);
 }
 .conteiner_1,
-.conteiner_2 {
+.conteiner_2,
+.entName {
   position: relative;
 }
 .sub_menu {
@@ -59,6 +60,11 @@ button {
   font-size: 32px;
   color: rgba(204, 233, 241, 0.89);
 }
+.entr {
+  width: 50px;
+  height: 22px;
+  background-color: rgba(167, 215, 224, 0.89);
+}
 main {
   height: 1vh;
   display: grid;
@@ -97,6 +103,9 @@ main {
   text-align: center;
   font-size: 50px;
   color: #fc3a34;
+}
+#result {
+  margin: 10px 15px;
 }
 *,
 *::before,

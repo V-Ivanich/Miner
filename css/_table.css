@@ -37,3 +37,6 @@ main {
   font-size: 50px;
   color: #fc3a34;
 }
+#result {
+  margin: 10px 15px;
+}
