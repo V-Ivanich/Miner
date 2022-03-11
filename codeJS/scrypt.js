@@ -1,24 +1,29 @@
 
-const tabl = document.querySelector('.pole');//место для таблицы
-const inPut = document.querySelector('#vvod'); //выбор размера поля
-let enter_bomb = document.querySelector('#enterBomb'); //дополнительные мины +5, +10, + 15
-let sumMine = document.querySelector('.sum'); //общее кол-во мин на поле
-const bTn = document.querySelector('.btn'); //кнопка
-const game = document.querySelector('#gm');// конец игры, - строка
-const minutes = document.getElementById('minutes');//минуты
-const seconds = document.getElementById('seconds');//секунды
-let massiv = [],
+const tabl = document.querySelector('.pole'),//место для таблицы
+  inPut = document.querySelector('#vvod'), //выбор размера поля
+  bTn = document.querySelector('.btn'), //кнопка
+  game = document.querySelector('#gm'),// конец игры, - строка
+  minutes = document.getElementById('minutes'),//минуты
+  seconds = document.getElementById('seconds'),//секунды
+  entrName = document.querySelector('.entr'),// ввод ф.и.о. игрока
+  results = document.querySelector('.result');//вывод рекордов
+
+let enter_bomb = document.querySelector('#enterBomb'), //дополнительные мины +5, +10, + 15
+  sumMine = document.querySelector('.sum'), //общее кол-во мин на поле
+  massiv = [],
   mina,
   tablica,
   sumBobms = 0,
   bomb = 0,
   globalOut = 0,
+  nikName = '',
+  place = [],
   n = 0,
   t = 0;
 
-let mins = 0;
-let secs = 0;
-let interval;
+let mins = 0,
+  secs = 0,
+  interval;
 
 function timer() {
   interval = setInterval(timerSet, 1000);
@@ -51,6 +56,9 @@ function randOm(min, max) {
 
 //!  создание таблицы для поля и начало игры
 bTn.addEventListener('click', function () {
+  nikName = entrName.value;
+  nikName = nikName.toUpperCase();
+  console.log(nikName);
 
   if (document.querySelector('table')) {
     tabl.removeChild(tablica);
@@ -135,7 +143,7 @@ bTn.addEventListener('click', function () {
         document.querySelector('.over').innerHTML = 'GAME OVER!';
         game.classList.add('run');
         globalOut = 1;
-        clearInterval(interval);
+        clearInterval(interval); //! stop timer
       }
     }
   }
@@ -170,10 +178,12 @@ bTn.addEventListener('click', function () {
           }
         }
         if (position + sumBobms == s_mine) {
-          console.log('winer!!!!!');
+          clearInterval(interval); //! stop timer
           document.querySelector('.over').innerHTML = 'YOU WON!';
           game.classList.add('run');
           globalOut = 1;
+          nikName = nikName + '  ' + mins + ':' + secs;
+          results.innerHTML += nikName;
         }
       }
     }
@@ -225,5 +235,3 @@ function calculation(r, c) {
   bomb++;
   massiv[r][c] = bomb;
 }
-//TODO : после взрыва, поле должно уехать влево, а справа
-//TODO : приехать могилка с текстом КОНЕЦ

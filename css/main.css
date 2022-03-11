@@ -21,10 +21,8 @@ h1 {
 .entName {
   position: relative;
 }
-.sub_menu {
-  display: flex;
-}
 select {
+  display: block;
   margin: 0 auto;
 }
 .heder {
@@ -61,8 +59,11 @@ button {
   color: rgba(204, 233, 241, 0.89);
 }
 .entr {
+  display: block;
   width: 50px;
   height: 22px;
+  margin: 0 auto;
+  text-align: center;
   background-color: rgba(167, 215, 224, 0.89);
 }
 main {
@@ -104,8 +105,11 @@ main {
   font-size: 50px;
   color: #fc3a34;
 }
-#result {
+.result {
   margin: 10px 15px;
+  border: 1px solid black;
+  padding: 5px 10px;
+  background-color: burlywood;
 }
 *,
 *::before,
